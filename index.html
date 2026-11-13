@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jacob Wolf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f0e8;--fg:#15171c;--muted:#5d6370;--line:#d8d1c1;--panel:#fffdf7;--accent:#08785a;--accent2:#c2410c;--accent3:#2b5bd7;--glow:rgba(8,120,90,.16)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#090c0f;--fg:#d8e3dd;--muted:#7f8c88;--line:#1d2828;--panel:#0e1417;--accent:#3ee6a8;--accent2:#ff8a4c;--accent3:#82a8ff;--glow:rgba(62,230,168,.16)}}
+:root[data-theme="dark"]{--bg:#090c0f;--fg:#d8e3dd;--muted:#7f8c88;--line:#1d2828;--panel:#0e1417;--accent:#3ee6a8;--accent2:#ff8a4c;--accent3:#82a8ff;--glow:rgba(62,230,168,.16)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden;
+ background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;background-attachment:fixed}
+a{color:var(--accent)}
+@keyframes boot{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes blink{50%{opacity:0}}
+@keyframes trace{to{stroke-dashoffset:0}}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes flow{0%{left:0%}100%{left:100%}}
+@keyframes sched{0%,14%{background:var(--glow);border-color:var(--accent)}17%,100%{background:var(--panel);border-color:var(--line)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+ <nav style="position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)">
+  <div style="max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;gap:16px;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">
+   <a href="#top" style="text-decoration:none;color:var(--fg);font-weight:800">jw@kernel<span style="color:var(--accent)">:~$</span></a>
+   <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+    <a href="#pipeline" style="color:var(--muted);text-decoration:none">/about</a>
+    <a href="#sched" style="color:var(--muted);text-decoration:none">/sched</a>
+    <a href="#procs" style="color:var(--muted);text-decoration:none">/proc</a>
+    <a href="#tty" style="color:var(--muted);text-decoration:none">/tty</a>
+    <button id="theme" aria-label="Toggle theme" style="font:inherit;background:none;border:1px solid var(--line);color:var(--fg);border-radius:6px;padding:2px 8px;cursor:pointer">◐</button>
+   </div>
+  </div>
+ </nav>
+ <div id="top" style="max-width:1080px;margin:0 auto;padding:56px 16px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center">
+  <div>
+   <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;color:var(--muted);line-height:1.8;margin-bottom:22px">
+    <div style="animation:boot .3s .1s both">[ 0.000000] ARMv8 core online, BTB/PHT warm</div>
+    <div style="animation:boot .3s .4s both">[ 0.041337] L1i/L1d caches: LRU ... <span style="color:var(--accent)">OK</span></div>
+    <div style="animation:boot .3s .7s both">[ 0.090210] mounting /home/jw (uchicago, cs+history) ... <span style="color:var(--accent)">OK</span></div>
+    <div style="animation:boot .3s 1s both">[ 0.131072] init: spawning pid 1 → <span style="color:var(--fg)">jacob</span></div>
+   </div>
+   <h1 style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:800;font-size:clamp(40px,8vw,72px);line-height:1.02;letter-spacing:-.03em;animation:boot .4s 1.2s both">Jacob<br>Wolf<span style="color:var(--accent);animation:blink 1s steps(1) infinite">_</span></h1>
+   <p style="margin:18px 0 0;font-size:18px;color:var(--muted);max-width:36ch;animation:boot .4s 1.4s both">Computer Science (Systems) &amp; History at the University of Chicago, class of 2027. Most recently a quantitative developer intern backtesting LLM-driven prediction-market strategies against real L2 order books.</p>
+   <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;animation:boot .4s 1.6s both">
+    <a href="https://github.com/jacobwolf-1" style="text-decoration:none;color:var(--bg);background:var(--fg);padding:9px 14px;border-radius:8px">GitHub</a>
+    <a href="https://www.linkedin.com/in/jacob-max-wolf" style="text-decoration:none;color:var(--fg);border:1px solid var(--fg);padding:8px 14px;border-radius:8px">LinkedIn</a>
+    <a href="https://x.com/jacobm_wolf" style="text-decoration:none;color:var(--fg);border:1px solid var(--line);padding:8px 14px;border-radius:8px">@jacobm_wolf</a>
+    <a href="Wolf_Jacob_Resume.pdf" style="text-decoration:none;color:var(--fg);border:1px solid var(--line);padding:8px 14px;border-radius:8px">resume.pdf</a>
+   </div>
+  </div>
+  <div style="position:relative;aspect-ratio:1/1;max-width:440px;width:100%;justify-self:center">
+   <svg viewBox="0 0 400 400" width="100%" height="100%" role="img" aria-label="Animated processor die" style="display:block">
+    <g fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round">
+     <path d="M200 120 V20" stroke-dasharray="120" stroke-dashoffset="120" style="animation:trace 1.2s .3s forwards"/>
+     <path d="M160 120 V60 H60 V20" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s .5s forwards"/>
+     <path d="M240 120 V70 H340 V20" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s .6s forwards"/>
+     <path d="M280 160 H380" stroke-dasharray="120" stroke-dashoffset="120" style="animation:trace 1.1s .4s forwards"/>
+     <path d="M280 200 H330 V300 H380" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s .8s forwards"/>
+     <path d="M280 240 H350 V380" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s .9s forwards"/>
+     <path d="M200 280 V380" stroke-dasharray="120" stroke-dashoffset="120" style="animation:trace 1.1s .5s forwards"/>
+     <path d="M160 280 V340 H40 V380" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s .7s forwards"/>
+     <path d="M120 200 H20" stroke-dasharray="120" stroke-dashoffset="120" style="animation:trace 1.1s .6s forwards"/>
+     <path d="M120 160 H70 V60" stroke-dasharray="160" stroke-dashoffset="160" style="animation:trace 1.3s .9s forwards"/>
+     <path d="M120 240 H60 V320 H20" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s 1s forwards"/>
+    </g>
+    <g fill="var(--accent)">
+     <circle cx="200" cy="20" r="4" style="animation:pulse 2s 1.5s infinite"/><circle cx="60" cy="20" r="4" style="animation:pulse 2s 1.7s infinite"/>
+     <circle cx="340" cy="20" r="4" style="animation:pulse 2s 1.9s infinite"/><circle cx="380" cy="160" r="4" style="animation:pulse 2s 1.6s infinite"/>
+     <circle cx="380" cy="300" r="4" style="animation:pulse 2s 2.1s infinite"/><circle cx="350" cy="380" r="4" style="animation:pulse 2s 2.2s infinite"/>
+     <circle cx="200" cy="380" r="4" style="animation:pulse 2s 1.8s infinite"/><circle cx="40" cy="380" r="4" style="animation:pulse 2s 2s infinite"/>
+     <circle cx="20" cy="200" r="4" style="animation:pulse 2s 1.6s infinite"/><circle cx="70" cy="60" r="4" style="animation:pulse 2s 2.3s infinite"/>
+     <circle cx="20" cy="320" r="4" style="animation:pulse 2s 2.4s infinite"/>
+    </g>
+    <rect x="120" y="120" width="160" height="160" rx="10" fill="var(--panel)" stroke="var(--fg)" stroke-width="2"/>
+    <g stroke="var(--line)" stroke-width="1">
+     <rect x="134" y="134" width="62" height="62" rx="4" fill="none"/><rect x="204" y="134" width="62" height="62" rx="4" fill="none"/>
+     <rect x="134" y="204" width="62" height="62" rx="4" fill="none"/><rect x="204" y="204" width="62" height="62" rx="4" fill="none"/>
+    </g>
+    <g font-family="JetBrains Mono,monospace" font-size="10" fill="var(--muted)" text-anchor="middle">
+     <text x="165" y="169">CORE0</text><text x="235" y="169">CORE1</text><text x="165" y="239">L1i</text><text x="235" y="239">L1d</text>
+    </g>
+    <g fill="var(--accent)">
+     <rect x="140" y="178" width="50" height="6" rx="3" style="animation:pulse 1.3s infinite"/>
+     <rect x="210" y="178" width="50" height="6" rx="3" style="animation:pulse 1.7s .3s infinite"/>
+     <rect x="140" y="248" width="50" height="6" rx="3" style="animation:pulse 1.1s .6s infinite"/>
+     <rect x="210" y="248" width="50" height="6" rx="3" style="animation:pulse 1.9s .2s infinite"/>
+    </g>
+   </svg>
+  </div>
+ </div>
+</header>
+
+<style>
+.sec{max-width:1080px;margin:0 auto;padding:56px 16px}
+.kicker{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px}
+.h2{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:clamp(24px,4vw,34px);margin:0 0 24px;letter-spacing:-.02em}
+.pipe{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.stage{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0;transition:border-color .2s,transform .2s}
+.stage:hover{border-color:var(--accent);transform:translateY(-3px)}
+.stage b{display:block;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:var(--accent)}
+.stage .sn{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:var(--muted)}
+.stage p{margin:8px 0 0;font-size:14px}
+.bus{position:relative;height:6px;border-radius:3px;background:var(--line);margin:18px 0 0;overflow:hidden}
+.bus i{position:absolute;top:0;width:18%;height:100%;border-radius:3px;background:linear-gradient(90deg,transparent,var(--accent));animation:flow 2.6s linear infinite;transform:translateX(-100%)}
+.bus i:nth-child(2){animation-delay:.87s}.bus i:nth-child(3){animation-delay:1.73s}
+.cw{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px}
+.cw span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;border:1px solid var(--line);background:var(--panel);border-radius:5px;padding:3px 8px;color:var(--muted)}
+@media (max-width:760px){.pipe{grid-template-columns:1fr}}
+</style>
+<section id="pipeline" class="sec">
+ <p class="kicker">// 01 · 5-stage pipeline</p>
+ <h2 class="h2">About, in five stages</h2>
+ <div class="pipe">
+  <div class="stage"><span class="sn">IF</span><b>fetch</b><p>B.S. Computer Science (Systems) and B.A. History at UChicago, May 2027.</p></div>
+  <div class="stage"><span class="sn">ID</span><b>decode</b><p>Comfortable from ARMv8 assembly and C up through Python, SQL and Swift.</p></div>
+  <div class="stage"><span class="sn">EX</span><b>execute</b><p>Built a cycle-accurate ARMv8 simulator with hazards, forwarding, branch prediction and caches.</p></div>
+  <div class="stage"><span class="sn">MEM</span><b>memory</b><p>Reconstructed executable prices from L2 order books to separate alpha from tradable return.</p></div>
+  <div class="stage"><span class="sn">WB</span><b>writeback</b><p>Shipped product at Coding Flora and data pipelines at Metrica IL.</p></div>
+ </div>
+ <div class="bus" aria-hidden="true"><i></i><i></i><i></i></div>
+ <div class="cw" aria-label="Relevant coursework"><span>Operating Systems</span><span>Computer Architecture</span><span>Systems Programming</span><span>Computer Security</span><span>ML for Computer Systems</span><span>Theory of Algorithms</span><span>Math of ML</span><span>Linear Algebra</span><span>Discrete Math</span><span>Software Development</span></div>
+</section>
+
+<style>
+.threads{display:grid;gap:10px}
+.thr{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;animation:sched 12s infinite}
+.thr:nth-child(2){animation-delay:2s}.thr:nth-child(3){animation-delay:4s}.thr:nth-child(4){animation-delay:6s}.thr:nth-child(5){animation-delay:8s}.thr:nth-child(6){animation-delay:10s}
+.thr .tid{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--muted);padding-top:3px}
+.thr h3{margin:0;font-size:16.5px}
+.thr .meta{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--muted);margin-top:2px}
+.thr ul{margin:8px 0 0;padding-left:18px;font-size:14.5px}
+.thr li{margin:3px 0}
+.thr p{margin:6px 0 0;font-size:14.5px}
+.thr .state{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;padding:2px 7px;border-radius:4px;border:1px solid currentColor;white-space:nowrap}
+.core{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--muted);margin-bottom:16px}
+.core .ring{width:16px;height:16px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:spin 1s linear infinite}
+@media (max-width:560px){.thr{grid-template-columns:1fr}.thr .tid{padding:0}}
+</style>
+<section id="sched" class="sec">
+ <p class="kicker">// 02 · round-robin scheduler</p>
+ <h2 class="h2">Experience threads</h2>
+ <div class="core"><span class="ring"></span>cpu0: quantum = 2s, run queue rotating</div>
+ <div class="threads">
+  <div class="thr"><span class="tid">tid 1</span><div><h3>Quantitative Developer Intern · Maritime Capital LLC</h3><div class="meta">New York, NY · Jul 2026 – Oct 2026</div><ul><li>Enabled backtesting of LLM-driven prediction-market strategies with Python/SQL pipelines combining forecasts, outcomes and historical L2 order books.</li><li>Reconstructed executable prices from L2 data; built taker and passive-entry backtests modeling fees, slippage, VWAP, fill probability and adverse selection.</li><li>Delivered a deployment recommendation by quantifying liquidity and capacity limits and separating statistical alpha from executable returns.</li></ul></div><span class="state" style="color:var(--muted)">EXITED(0)</span></div>
+  <div class="thr"><span class="tid">tid 2</span><div><h3>Software Engineering Intern · Coding Flora</h3><div class="meta">Chicago, IL · Jan 2025 – Sep 2025</div><ul><li>Shipped four user-facing features across three product workflows.</li><li>Refactored 10+ front-end components and reviewed changes for maintainability and release quality.</li></ul></div><span class="state" style="color:var(--muted)">EXITED(0)</span></div>
+  <div class="thr"><span class="tid">tid 3</span><div><h3>Software Engineering Intern · Metrica IL</h3><div class="meta">Jerusalem, Israel · Jun 2024 – Aug 2024</div><ul><li>Extracted 10,000+ CRM data points with Python scrapers (requests, pandas, xlrd).</li><li>Automated data preparation for financial dashboards through pipelines integrated with Power BI.</li></ul></div><span class="state" style="color:var(--muted)">EXITED(0)</span></div>
+  <div class="thr"><span class="tid">tid 4</span><div><h3>Building Manager · UChicago Student Centers</h3><div class="meta">Mar 2026 – present</div></div><span class="state" style="color:var(--accent)">RUNNING</span></div>
+  <div class="thr"><span class="tid">tid 5</span><div><h3>Algo Group · SWE professional development cohort</h3><div class="meta">Jan 2025 – present · selected member</div></div><span class="state" style="color:var(--accent)">RUNNING</span></div>
+  <div class="thr"><span class="tid">tid 6</span><div><h3>Torah Chair · Yavneh of Hyde Park</h3><div class="meta">Mar 2024 – Mar 2025 · taught 10–15 attendees weekly</div></div><span class="state" style="color:var(--muted)">EXITED(0)</span></div>
+ </div>
+</section>
+
+<style>
+.ps{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px}
+.ps-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
+.ps-row,.ps-head{display:grid;grid-template-columns:56px 44px 64px minmax(0,1fr) 18px;gap:10px;align-items:center;padding:11px 14px}
+.ps-head{color:var(--muted);font-size:11.5px;border-bottom:1px solid var(--line)}
+.ps details{border-bottom:1px solid var(--line)}
+.ps details:last-child{border-bottom:0}
+.ps summary{list-style:none;cursor:pointer}
+.ps summary::-webkit-details-marker{display:none}
+.ps summary:hover{background:var(--glow)}
+.ps .st{color:var(--accent);font-weight:600}
+.ps .st.s{color:var(--accent3)}
+.ps .cmd{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps .car{color:var(--muted);transition:transform .2s}
+.ps details[open] .car{transform:rotate(90deg)}
+.ps .body{padding:2px 14px 16px 124px;font-family:Inter,system-ui,sans-serif;font-size:14.5px;color:var(--fg)}
+.ps .body ul{margin:0 0 10px;padding-left:18px}
+.ps .body li{margin:3px 0}
+.ps .tags{display:flex;gap:6px;flex-wrap:wrap}
+.ps .tags span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:var(--muted)}
+.cpu{display:flex;align-items:center;gap:6px}
+.cpu em{display:block;height:5px;border-radius:3px;background:var(--accent);font-style:normal;transition:width .6s}
+@media (max-width:640px){.ps-row,.ps-head{grid-template-columns:44px 30px 52px minmax(0,1fr) 14px;gap:6px;font-size:12px}.ps .body{padding:2px 14px 16px}}
+</style>
+<section id="procs" class="sec">
+ <p class="kicker">// 03 · ps aux | grep projects</p>
+ <h2 class="h2">Running processes</h2>
+ <div class="ps">
+  <div class="ps-top"><span>tasks: 6 total, 5 running, 1 sleeping</span><span id="loadavg">load average: 0.42 0.37 0.31</span></div>
+  <div class="ps-head"><span>PID</span><span>S</span><span>%CPU</span><span>COMMAND</span><span></span></div>
+  <details open>
+   <summary class="ps-row"><span>1</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:48px"></em></span><span class="cmd">./pintos --threads --userprog --vm</span><span class="car">›</span></summary>
+   <div class="body"><ul><li>Extended Pintos, a small x86 teaching operating system, from a bare kernel into one that runs real user programs.</li><li><b>Threads:</b> kernel thread scheduling and synchronization.</li><li><b>User programs:</b> loading and running user processes and handling their system calls.</li><li><b>Virtual memory:</b> paging so each process gets its own address space, independent of physical memory.</li></ul><div class="tags"><span>C</span><span>x86</span><span>concurrency</span><span>virtual memory</span><span>OS</span></div></div>
+  </details>
+  <details>
+   <summary class="ps-row"><span>1024</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:44px"></em></span><span class="cmd">./armv8_sim --pipeline --bp=btb,pht --cache=lru</span><span class="car">›</span></summary>
+   <div class="body"><ul><li>Cycle-accurate ARMv8 simulator in C for evaluating pipeline, cache and branch-prediction performance.</li><li>Hazard detection, forwarding and control-flow handling to model stalls and execution.</li><li>BTB/PHT branch prediction and LRU instruction/data caches, evaluated on benchmark traces.</li></ul><div class="tags"><span>C</span><span>ARMv8</span><span>architecture</span><span>Git</span></div></div>
+  </details>
+  <details>
+   <summary class="ps-row"><span>2048</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:34px"></em></span><span class="cmd">./macro_placer --tournament --deterministic</span><span class="car">›</span></summary>
+   <div class="body"><ul><li>Co-developed a deterministic tournament placer for the Partcl/HRT challenge that generates and ranks VLSI macro-placement candidates.</li><li>Candidate generation and scoring, graph/anchor heuristics and spacing metrics to optimize proxy cost.</li><li>Experiment logging and ablation tools to evaluate individual heuristics.</li></ul><div class="tags"><span>Python</span><span>PyTorch</span><span>NumPy</span><span>OpenROAD</span></div></div>
+  </details>
+  <details>
+   <summary class="ps-row"><span>3072</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:28px"></em></span><span class="cmd">./lzw -c --maxbits=16 &lt; in.bin &gt; out.lzw</span><span class="car">›</span></summary>
+   <div class="body"><ul><li>Compressed binary streams with a C LZW codec using bit-level output and a MAXBITS code-width limit.</li><li>Chained hash-table dictionary lookups; verified lossless round trips across binary inputs.</li></ul><div class="tags"><span>C</span><span>Python</span><span>compression</span></div></div>
+  </details>
+  <details>
+   <summary class="ps-row"><span>4096</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:26px"></em></span><span class="cmd">./fastlog --serve --openapi</span><span class="car">›</span></summary>
+   <div class="body"><ul><li>Nutrition-tracking MVP spanning a SwiftUI app and Supabase backend: meal logging, daily macro targets, dashboards.</li><li>Assistants can log meals and update targets through authenticated REST endpoints documented with OpenAPI.</li><li>PostgreSQL model for logs, saved meals and targets, with saved-meal alias resolution and app sync.</li></ul><div class="tags"><span>SwiftUI</span><span>Supabase</span><span>PostgreSQL</span><span>TypeScript</span><span>HealthKit</span></div></div>
+  </details>
+  <details>
+   <summary class="ps-row"><span>8192</span><span class="st s">S</span><span class="cpu"><em data-cpu style="width:14px"></em></span><span class="cmd">./checkers --bot=minimax --difficulty=hard</span><span class="car">›</span></summary>
+   <div class="body"><ul><li>Playable checkers module for a course's online gaming platform (Chi Game), with game rules and multiple bot opponents.</li><li>Minimax-based hard bot; contributions merged through pull requests, code review and issue tracking.</li></ul><div class="tags"><span>JavaScript</span><span>Phaser 3</span><span>Linux</span></div></div>
+  </details>
+ </div>
+ <p style="font-size:13px;color:var(--muted);margin-top:12px;font-family:'JetBrains Mono',ui-monospace,monospace">source → <a href="https://github.com/jacobwolf-1">github.com/jacobwolf-1</a></p>
+</section>
+
+<style>
+.tty{background:#05080a;color:#cfe9dd;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;box-shadow:0 20px 60px -30px var(--glow)}
+.tty-bar{display:flex;gap:7px;align-items:center;padding:10px 14px;background:#0d1316;border-bottom:1px solid #1b2629;color:#6f8580;font-size:12px}
+.tty-bar i{width:11px;height:11px;border-radius:50%;background:#2a3438;display:block}
+.tty-bar i:nth-child(1){background:#ff5f57}.tty-bar i:nth-child(2){background:#febc2e}.tty-bar i:nth-child(3){background:#28c840}
+.tty-out{padding:14px 16px;height:340px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;line-height:1.55}
+.tty-in{display:flex;gap:8px;align-items:center;padding:0 16px 14px}
+.tty-in span{color:#3ee6a8}
+.tty-in input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#cfe9dd;font:inherit;caret-color:#3ee6a8}
+.tty .g{color:#3ee6a8}.tty .o{color:#ff8a4c}.tty .b{color:#82a8ff}.tty .m{color:#6f8580}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chips button{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer}
+.chips button:hover{border-color:var(--accent);color:var(--accent)}
+</style>
+<section id="tty" class="sec">
+ <p class="kicker">// 04 · /dev/tty0</p>
+ <h2 class="h2">Talk to the kernel</h2>
+ <div class="tty">
+  <div class="tty-bar"><i></i><i></i><i></i><span style="margin-left:8px">jw@kernel — bash</span></div>
+  <div class="tty-out" id="out"><span class="m">JW-OS 6.0 (tty0). Type </span><span class="g">help</span><span class="m"> to list commands.</span>
+
+<span class="g">jw@kernel:~$</span> whoami
+Jacob Wolf · CS (Systems) + History @ UChicago '27
+</div>
+  <form class="tty-in" id="form" autocomplete="off"><span>jw@kernel:~$</span><input id="cmd" aria-label="Terminal command" spellcheck="false"></form>
+ </div>
+ <div class="chips" id="chips"><button>help</button><button>ls projects</button><button>cat skills.txt</button><button>cat interests.txt</button><button>top</button><button>contact</button><button>sudo hire jw</button></div>
+</section>
+
+<style>
+.foot{max-width:1080px;margin:0 auto;padding:24px 16px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.sys{display:block;text-decoration:none;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;transition:border-color .2s,transform .2s;overflow-wrap:anywhere}
+.sys:hover{border-color:var(--accent);transform:translateY(-2px)}
+.sys small{display:block;color:var(--muted);font-size:11.5px;margin-bottom:4px}
+</style>
+<footer id="contact">
+ <div class="sec" style="padding-bottom:0"><p class="kicker">// 05 · syscalls</p><h2 class="h2" style="margin-bottom:0">Get in touch</h2></div>
+ <div class="foot">
+  <a class="sys" href="mailto:jacobwolf@uchicago.edu"><small>sys_write("mail")</small>jacobwolf@uchicago.edu</a>
+  <a class="sys" href="https://github.com/jacobwolf-1"><small>sys_open("github")</small>jacobwolf-1</a>
+  <a class="sys" href="https://www.linkedin.com/in/jacob-max-wolf"><small>sys_open("linkedin")</small>jacob-max-wolf</a>
+  <a class="sys" href="https://x.com/jacobm_wolf"><small>sys_open("x")</small>@jacobm_wolf</a>
+  <a class="sys" href="Wolf_Jacob_Resume.pdf"><small>sys_read("resume.pdf")</small>Download resume</a>
+ </div>
+ <p style="text-align:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--muted);padding:0 16px 40px">© 2026 Jacob Wolf · process exited with status 0</p>
+</footer>
+
+<script>
+(function(){
+ var root=document.documentElement;
+ try{var t=localStorage.getItem('jw-theme');if(t)root.setAttribute('data-theme',t);}catch(e){}
+ document.getElementById('theme').addEventListener('click',function(){
+  var cur=root.getAttribute('data-theme');
+  var dark=cur?cur==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  var n=dark?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('jw-theme',n);}catch(e){}
+ });
+
+ var bars=[].slice.call(document.querySelectorAll('[data-cpu]'));
+ var base=bars.map(function(b){return parseFloat(b.style.width);});
+ var la=document.getElementById('loadavg'),l=[.42,.37,.31];
+ setInterval(function(){
+  bars.forEach(function(b,i){var w=Math.max(3,Math.min(52,base[i]+(Math.random()-.5)*base[i]*.8));b.style.width=w+'px';});
+  l[0]=Math.max(.05,l[0]+(Math.random()-.5)*.12);l[1]=l[1]*.9+l[0]*.1;l[2]=l[2]*.97+l[0]*.03;
+  la.textContent='load average: '+l.map(function(x){return x.toFixed(2)}).join(' ');
+ },1100);
+
+ var out=document.getElementById('out'),inp=document.getElementById('cmd'),hist=[],hi=0;
+ function esc(s){return s.replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]});}
+ function print(html){out.innerHTML+=html+'\n';out.scrollTop=out.scrollHeight;}
+ var L='style="color:#82a8ff"';
+ var cmds={
+  help:function(){return '<span class="b">whoami</span>            who is this\n<span class="b">ls projects</span>       list running processes\n<span class="b">cat skills.txt</span>    languages and tools\n<span class="b">cat interests.txt</span> off the clock\n<span class="b">top</span>               recent experience\n<span class="b">contact</span>           how to reach me\n<span class="b">open github|linkedin|x|resume</span>\n<span class="b">clear</span>             clear the screen';},
+  whoami:function(){return 'Jacob Wolf · CS (Systems) + History @ UChicago \'27';},
+  'ls projects':function(){return '<span class="g">pintos/</span><span class="g">armv8_sim/</span>  <span class="g">macro_placer/</span>\n<span class="g">lzw/</span>  <span class="g">fastlog/</span>  <span class="m">checkers/</span>';},
+  ls:function(){return cmds['ls projects']();},
+  'cat skills.txt':function(){return '<span class="m">languages:</span> Python, C, JavaScript, SQL, Swift, ARMv8 asm, HTML/CSS\n<span class="m">tools:</span>     pandas, NumPy, PyTorch, matplotlib, pytest, React,\n           Django, Git, Linux, REST APIs, OAuth';},
+  'cat interests.txt':function(){return 'poker · soccer · cooking · hiking · A Song of Ice and Fire';},
+  top:function(){return '<span class="m">  TID  STATE     THREAD</span>\n    1  EXITED    Quant Dev Intern, Maritime Capital (2026)\n    2  EXITED    SWE Intern, Coding Flora (2025)\n    3  EXITED    SWE Intern, Metrica IL (2024)\n    4  RUNNING   Building Manager, UChicago Student Centers';},
+  contact:function(){return 'email:    <a href="mailto:jacobwolf@uchicago.edu" '+L+'>jacobwolf@uchicago.edu</a>\ngithub:   <a href="https://github.com/jacobwolf-1" '+L+'>jacobwolf-1</a>\nlinkedin: <a href="https://www.linkedin.com/in/jacob-max-wolf" '+L+'>jacob-max-wolf</a>\nx:        <a href="https://x.com/jacobm_wolf" '+L+'>@jacobm_wolf</a>';},
+  'open x':function(){window.open('https://x.com/jacobm_wolf','_blank');return 'opening x.com/jacobm_wolf ...';},
+  'open github':function(){window.open('https://github.com/jacobwolf-1','_blank');return 'opening github.com/jacobwolf-1 ...';},
+  'open linkedin':function(){window.open('https://www.linkedin.com/in/jacob-max-wolf','_blank');return 'opening linkedin ...';},
+  'open resume':function(){window.open('Wolf_Jacob_Resume.pdf','_blank');return 'reading resume.pdf ...';},
+  'sudo hire jw':function(){return '[sudo] password for recruiter: ********\n<span class="g">permission granted.</span> scheduling interview with pid 1 ...\n→ <a href="mailto:jacobwolf@uchicago.edu" '+L+'>jacobwolf@uchicago.edu</a>';},
+  sudo:function(){return '<span class="o">usage:</span> sudo hire jw';},
+  'rm -rf /':function(){return '<span class="o">nice try.</span> kernel panic averted.';},
+  exit:function(){return 'there is no escape from pid 1.';}
+ };
+ function run(c){
+  c=c.trim().replace(/\s+/g,' ');if(!c)return;
+  print('<span class="g">jw@kernel:~$</span> '+esc(c));
+  if(c==='clear'){out.innerHTML='';return;}
+  var f=cmds[c.toLowerCase()];
+  print(f?f():'<span class="o">bash: '+esc(c)+': command not found</span> · try <span class="g">help</span>');
+ }
+ document.getElementById('form').addEventListener('submit',function(e){e.preventDefault();var v=inp.value;if(v.trim()){hist.push(v);hi=hist.length;}run(v);inp.value='';});
+ inp.addEventListener('keydown',function(e){
+  if(e.key==='ArrowUp'&&hi>0){hi--;inp.value=hist[hi];e.preventDefault();}
+  else if(e.key==='ArrowDown'){hi=Math.min(hist.length,hi+1);inp.value=hist[hi]||'';e.preventDefault();}
+ });
+ document.getElementById('chips').addEventListener('click',function(e){if(e.target.tagName==='BUTTON'){run(e.target.textContent);}});
+})();
+</script>
+</body>
+</html>
+
