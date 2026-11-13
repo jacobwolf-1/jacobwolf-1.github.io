@@ -4,349 +4,385 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Jacob Wolf</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23090c0f'/%3E%3Cpath d='M15 20l12 12-12 12' fill='none' stroke='%233ee6a8' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='32' y='40' width='18' height='6' rx='3' fill='%233ee6a8'/%3E%3C/svg%3E">
+<meta name="description" content="Jacob Wolf. Computer Science (Systems) and History at the University of Chicago, class of 2027. Systems, data infrastructure and quantitative development.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23800000'/%3E%3Ccircle cx='44' cy='20' r='9' fill='%23d6d6ce'/%3E%3C/svg%3E">
+<script>try{if(localStorage.getItem('jw-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f3f0e8;--fg:#15171c;--muted:#5d6370;--line:#d8d1c1;--panel:#fffdf7;--accent:#08785a;--accent2:#c2410c;--accent3:#2b5bd7;--glow:rgba(8,120,90,.16)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#090c0f;--fg:#d8e3dd;--muted:#7f8c88;--line:#1d2828;--panel:#0e1417;--accent:#3ee6a8;--accent2:#ff8a4c;--accent3:#82a8ff;--glow:rgba(62,230,168,.16)}}
-:root[data-theme="dark"]{--bg:#090c0f;--fg:#d8e3dd;--muted:#7f8c88;--line:#1d2828;--panel:#0e1417;--accent:#3ee6a8;--accent2:#ff8a4c;--accent3:#82a8ff;--glow:rgba(62,230,168,.16)}
+:root{
+  /* dark is the default */
+  --paper:#141414;
+  --ink:#f1f1f1;
+  --soft:#a3a3a3;
+  --rule:#2f2f2f;
+  --mark:#262626;
+  --accent:#d26a70;
+  --maroon:#800000;
+  --on-maroon:#ffffff;
+  color-scheme:dark;
+  --sans:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --cond:"IBM Plex Sans Condensed","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="light"]{
+  --paper:#fafafa;
+  --ink:#1a1a1a;
+  --soft:#666666;
+  --rule:#dadada;
+  --mark:#ececec;
+  --accent:#800000;
+  color-scheme:light;
+}
+
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden;
- background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;background-attachment:fixed}
-a{color:var(--accent)}
-@keyframes boot{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-@keyframes blink{50%{opacity:0}}
-@keyframes trace{to{stroke-dashoffset:0}}
-@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
-@keyframes flow{0%{left:0%}100%{left:100%}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:15.5px/1.6 var(--sans)}
+.sheet{max-width:1000px;margin:0 auto;padding:0 28px}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:3px}
+a:hover{color:var(--accent)}
+p{margin:0 0 .8em}
+ul{margin:0;padding:0;list-style:none}
+li{position:relative;padding-left:1.15em;margin:.3em 0}
+li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+h1,h2,h3{margin:0;font-family:var(--cond)}
+
+/* top */
+.bar{background:var(--maroon);color:var(--on-maroon)}
+.bar .sheet{display:flex;justify-content:flex-end;align-items:center;height:34px}
+.theme{font:500 12px var(--mono);background:none;border:0;color:inherit;cursor:pointer;padding:4px 0;display:flex;gap:8px;align-items:center;opacity:.92}
+.theme:hover{opacity:1}
+.theme span{opacity:.55}
+.theme span.on{opacity:1;text-decoration:underline;text-underline-offset:3px}
+.hero{position:relative;padding:46px 0 34px}
+.hero > :not(.pfp){max-width:calc(100% - 200px)}
+.pfp{position:absolute;right:0;top:46px;width:158px;height:210px;object-fit:cover;object-position:50% 40%;border:1px solid var(--rule);box-shadow:8px 8px 0 var(--maroon)}
+h1{font-weight:700;font-size:clamp(38px,6vw,58px);line-height:1;letter-spacing:-.01em}
+.sub{font:500 clamp(17px,2vw,20px)/1.45 var(--cond);max-width:56ch;margin:16px 0 0}
+.sub span{color:var(--soft)}
+.links{margin:18px 0 0;font:500 13.5px/1.9 var(--mono);display:flex;flex-wrap:wrap;gap:0 22px}
+
+/* sections */
+section{border-top:1.5px solid var(--ink);padding:12px 0 44px}
+h2{font-weight:700;font-size:23px;line-height:1.2;margin-bottom:16px;display:flex;align-items:baseline;gap:12px}
+h2 b{font:600 12px/1 var(--mono);background:var(--maroon);color:var(--on-maroon);padding:5px 7px;align-self:center}
+h3{font-weight:600;font-size:18.5px;line-height:1.25}
+.note{font-size:14px;color:var(--soft);margin-top:10px}
+
+.front{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:0 56px}
+.cols2{columns:2;column-gap:24px}
+.cols2 li{break-inside:avoid;margin:0;padding-bottom:.45em}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th{font:500 11px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.07em;text-align:left;padding:7px 14px 6px 0;border-bottom:1px solid var(--ink);white-space:nowrap}
+td{padding:9px 16px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.k{font:500 13px/1.6 var(--mono);white-space:nowrap;color:var(--accent)}
+td.m{font:13px/1.6 var(--mono)}
+
+/* experience */
+.job{display:grid;grid-template-columns:180px minmax(0,1fr);gap:8px 30px;padding:20px 0;border-top:1px solid var(--rule)}
+.job:first-of-type{border-top:0;padding-top:4px}
+.job .when{font:12.5px/1.6 var(--mono);color:var(--soft);padding-top:3px}
+.job .when b{display:block;color:var(--ink);font-weight:500}
+.job h3 em{font-style:normal;color:var(--soft);font-weight:500}
+.job ul{margin-top:8px;max-width:70ch}
+.also{margin-top:16px}
+.also caption{caption-side:top;text-align:left;font:500 12px var(--mono);color:var(--soft);padding-bottom:6px}
+
+/* projects */
+.lead{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px 52px;padding:4px 0 26px}
+.apps{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 52px}
+.app{padding:20px 0 22px;border-top:1px solid var(--rule)}
+.cmd{font:12.5px/1.5 var(--mono);color:var(--soft);margin:5px 0 9px;overflow-wrap:anywhere}
+.cmd::before{content:"$ ";color:var(--accent)}
+.stack{font:11.5px/1.5 var(--mono);color:var(--soft);margin:10px 0 0;text-transform:uppercase;letter-spacing:.05em}
+figure{margin:0}
+figcaption{font:12px/1.5 var(--mono);color:var(--soft);margin-top:10px}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:var(--mono);fill:var(--ink)}
+.scroll{overflow-x:auto}
+.box{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}
+.reg{fill:var(--ink)}
+.wire{fill:none;stroke:var(--ink);stroke-width:1.3}
+.wire.m{stroke:var(--accent)}
+.wire.d{stroke-dasharray:4 3}
+
+footer{border-top:6px solid var(--maroon);padding:12px 0 40px;font:11.5px/1.6 var(--mono);color:var(--soft)}
+
+@media (max-width:820px){
+  .sheet{padding:0 18px}
+  .hero > :not(.pfp){max-width:none}
+  .hero h1{padding-right:96px}
+  .pfp{top:30px;width:72px;height:72px;border-radius:50%;box-shadow:4px 4px 0 var(--maroon)}
+  .front,.lead,.apps{grid-template-columns:minmax(0,1fr)}
+  .front > div + div{border-top:1px solid var(--rule);padding-top:12px;margin-top:8px}
+  .job{grid-template-columns:minmax(0,1fr)}
+  td.k{white-space:normal}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{
+  body{font-size:11pt}
+  section,.job,.app{break-inside:avoid}
+}
 </style>
 </head>
 <body>
-<header>
- <nav style="position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)">
-  <div style="max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;gap:16px;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">
-   <a href="#top" style="text-decoration:none;color:var(--fg);font-weight:800">jw@kernel<span style="color:var(--accent)">:~$</span></a>
-   <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
-    <a href="#pipeline" style="color:var(--muted);text-decoration:none">/about</a>
-    <a href="#sched" style="color:var(--muted);text-decoration:none">/sched</a>
-    <a href="#procs" style="color:var(--muted);text-decoration:none">/proc</a>
-    <a href="#tty" style="color:var(--muted);text-decoration:none">/tty</a>
-    <button id="theme" aria-label="Toggle theme" style="font:inherit;background:none;border:1px solid var(--line);color:var(--fg);border-radius:6px;padding:2px 8px;cursor:pointer">◐</button>
-   </div>
-  </div>
- </nav>
- <div id="top" style="max-width:1080px;margin:0 auto;padding:56px 16px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center">
-  <div>
-   <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;color:var(--muted);line-height:1.8;margin-bottom:22px">
-    <div style="animation:boot .3s .1s both">[ 0.000000] ARMv8 core online, BTB/PHT warm</div>
-    <div style="animation:boot .3s .4s both">[ 0.041337] L1i/L1d caches: LRU ... <span style="color:var(--accent)">OK</span></div>
-    <div style="animation:boot .3s .7s both">[ 0.090210] mounting /home/jw (uchicago, cs+history) ... <span style="color:var(--accent)">OK</span></div>
-    <div style="animation:boot .3s 1s both">[ 0.131072] init: spawning pid 1 → <span style="color:var(--fg)">jacob</span></div>
-   </div>
-   <h1 style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:800;font-size:clamp(40px,8vw,72px);line-height:1.02;letter-spacing:-.03em;animation:boot .4s 1.2s both">Jacob<br>Wolf<span style="color:var(--accent);animation:blink 1s steps(1) infinite">_</span></h1>
-   <p style="margin:18px 0 0;font-size:18px;color:var(--muted);max-width:36ch;animation:boot .4s 1.4s both">Computer Science (Systems) &amp; History at the University of Chicago, class of 2027. Most recently a quant dev intern at Maritime Capital, building Python/SQL pipelines that join LLM forecasts and market outcomes with historical L2 order books.</p>
-   <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;animation:boot .4s 1.6s both">
-    <a href="https://github.com/jacobwolf-1" style="text-decoration:none;color:var(--bg);background:var(--fg);padding:9px 14px;border-radius:8px">GitHub</a>
-    <a href="https://www.linkedin.com/in/jacob-max-wolf" style="text-decoration:none;color:var(--fg);border:1px solid var(--fg);padding:8px 14px;border-radius:8px">LinkedIn</a>
-    <a href="https://x.com/jacobm_wolf" style="text-decoration:none;color:var(--fg);border:1px solid var(--line);padding:8px 14px;border-radius:8px">Twitter</a>
-    <a href="Wolf_Jacob_Resume.pdf" style="text-decoration:none;color:var(--fg);border:1px solid var(--line);padding:8px 14px;border-radius:8px">Resume</a>
-   </div>
-  </div>
-  <div style="position:relative;aspect-ratio:1/1;max-width:440px;width:100%;justify-self:center">
-   <svg viewBox="0 0 400 400" width="100%" height="100%" role="img" aria-label="Animated processor die" style="display:block">
-    <g fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round">
-     <path d="M200 120 V20" stroke-dasharray="120" stroke-dashoffset="120" style="animation:trace 1.2s .3s forwards"/>
-     <path d="M160 120 V60 H60 V20" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s .5s forwards"/>
-     <path d="M240 120 V70 H340 V20" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s .6s forwards"/>
-     <path d="M280 160 H380" stroke-dasharray="120" stroke-dashoffset="120" style="animation:trace 1.1s .4s forwards"/>
-     <path d="M280 200 H330 V300 H380" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s .8s forwards"/>
-     <path d="M280 240 H350 V380" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s .9s forwards"/>
-     <path d="M200 280 V380" stroke-dasharray="120" stroke-dashoffset="120" style="animation:trace 1.1s .5s forwards"/>
-     <path d="M160 280 V340 H40 V380" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s .7s forwards"/>
-     <path d="M120 200 H20" stroke-dasharray="120" stroke-dashoffset="120" style="animation:trace 1.1s .6s forwards"/>
-     <path d="M120 160 H70 V60" stroke-dasharray="160" stroke-dashoffset="160" style="animation:trace 1.3s .9s forwards"/>
-     <path d="M120 240 H60 V320 H20" stroke-dasharray="220" stroke-dashoffset="220" style="animation:trace 1.4s 1s forwards"/>
-    </g>
-    <g fill="var(--accent)">
-     <circle cx="200" cy="20" r="4" style="animation:pulse 2s 1.5s infinite"/><circle cx="60" cy="20" r="4" style="animation:pulse 2s 1.7s infinite"/>
-     <circle cx="340" cy="20" r="4" style="animation:pulse 2s 1.9s infinite"/><circle cx="380" cy="160" r="4" style="animation:pulse 2s 1.6s infinite"/>
-     <circle cx="380" cy="300" r="4" style="animation:pulse 2s 2.1s infinite"/><circle cx="350" cy="380" r="4" style="animation:pulse 2s 2.2s infinite"/>
-     <circle cx="200" cy="380" r="4" style="animation:pulse 2s 1.8s infinite"/><circle cx="40" cy="380" r="4" style="animation:pulse 2s 2s infinite"/>
-     <circle cx="20" cy="200" r="4" style="animation:pulse 2s 1.6s infinite"/><circle cx="70" cy="60" r="4" style="animation:pulse 2s 2.3s infinite"/>
-     <circle cx="20" cy="320" r="4" style="animation:pulse 2s 2.4s infinite"/>
-    </g>
-    <rect x="120" y="120" width="160" height="160" rx="10" fill="var(--panel)" stroke="var(--fg)" stroke-width="2"/>
-    <g stroke="var(--line)" stroke-width="1">
-     <rect x="134" y="134" width="62" height="62" rx="4" fill="none"/><rect x="204" y="134" width="62" height="62" rx="4" fill="none"/>
-     <rect x="134" y="204" width="62" height="62" rx="4" fill="none"/><rect x="204" y="204" width="62" height="62" rx="4" fill="none"/>
-    </g>
-    <g font-family="JetBrains Mono,monospace" font-size="10" fill="var(--muted)" text-anchor="middle">
-     <text x="165" y="169">CORE0</text><text x="235" y="169">CORE1</text><text x="165" y="239">L1i</text><text x="235" y="239">L1d</text>
-    </g>
-    <g fill="var(--accent)">
-     <rect x="140" y="178" width="50" height="6" rx="3" style="animation:pulse 1.3s infinite"/>
-     <rect x="210" y="178" width="50" height="6" rx="3" style="animation:pulse 1.7s .3s infinite"/>
-     <rect x="140" y="248" width="50" height="6" rx="3" style="animation:pulse 1.1s .6s infinite"/>
-     <rect x="210" y="248" width="50" height="6" rx="3" style="animation:pulse 1.9s .2s infinite"/>
-    </g>
-   </svg>
-  </div>
- </div>
+<div class="bar"><div class="sheet"><button class="theme" id="theme" type="button" aria-label="Switch colour theme"><span data-t="dark">Dark</span>/<span data-t="light">Light</span></button></div></div>
+<div class="sheet">
+<header class="hero">
+  <img class="pfp" src="jw_pfp.jpg" alt="Jacob Wolf sitting on a rock above a mountain valley" width="158" height="210">
+  <h1>Jacob Wolf</h1>
+  <p class="sub">I'm a senior at UChicago studying Computer Science (Systems) and History. <span>I like working close to the machine or close to the data, from operating system kernels to trading data pipelines and backtests.></p>
+  <p class="links">
+    <a href="mailto:jacobwolf@uchicago.edu">Email</a>
+    <a href="https://github.com/jacobwolf-1">GitHub</a>
+    <a href="https://www.linkedin.com/in/jacob-max-wolf">LinkedIn</a>
+    <a href="https://x.com/jacobm_wolf">Twitter</a>
+    <a href="Wolf_Jacob_Resume.pdf">Resume</a>
+  </p>
 </header>
 
-<style>
-.sec{max-width:1080px;margin:0 auto;padding:56px 16px}
-.kicker{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px}
-.h2{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:clamp(24px,4vw,34px);margin:0 0 24px;letter-spacing:-.02em}
-.pipe{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
-.stage{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0;transition:border-color .2s,transform .2s}
-.stage:hover{border-color:var(--accent);transform:translateY(-3px)}
-.stage b{display:block;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:var(--accent)}
-.stage .sn{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:var(--muted)}
-.stage p{margin:8px 0 0;font-size:14px}
-.bus{position:relative;height:6px;border-radius:3px;background:var(--line);margin:18px 0 0;overflow:hidden}
-.bus i{position:absolute;top:0;width:18%;height:100%;border-radius:3px;background:linear-gradient(90deg,transparent,var(--accent));animation:flow 2.6s linear infinite;transform:translateX(-100%)}
-.bus i:nth-child(2){animation-delay:.87s}.bus i:nth-child(3){animation-delay:1.73s}
-.cw{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px}
-.cw .lbl{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--accent);padding:3px 4px 3px 0;align-self:center}
-.cw span:not(.lbl){font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;border:1px solid var(--line);background:var(--panel);border-radius:5px;padding:3px 8px;color:var(--muted)}
-@media (max-width:760px){.pipe{grid-template-columns:1fr}}
-</style>
-<section id="pipeline" class="sec">
- <p class="kicker">// 01 · 5-stage pipeline</p>
- <h2 class="h2">About, in five stages</h2>
- <div class="pipe">
-  <div class="stage"><span class="sn">IF</span><b>fetch</b><p>Looking for new grad SWE roles in systems, backend, data infra, AI agents, and QD. I am especially interested in performance work, data pipelines, trading infra, and agent tooling.</p></div>
-  <div class="stage"><span class="sn">ID</span><b>decode</b><p>C and ARMv8 assembly for kernels and performance work. Python (pandas, NumPy, PyTorch) and SQL for data and ML. Swift, TypeScript and React for apps. Linux, Git, pytest and REST/OAuth throughout.</p></div>
-  <div class="stage"><span class="sn">EX</span><b>execute</b><p>In my last internship, I worked on building executability filters from L2 data for trading strategy backtests net of fees, slippage and adverse selection, then sized liquidity and capacity limits into a deployment call.</p></div>
-  <div class="stage"><span class="sn">MEM</span><b>memory</b><p>Previuusly, I have shipped user facing features and refactored front-end components at Coding Flora, and built Python scrapers and pipelines for over 10,000+ CRM records at Metrica IL.</p></div>
-  <div class="stage"><span class="sn">WB</span><b>writeback</b><p>One project I am proud of is FastLog, a SwiftUI + Supabase macro tracker where ChatGPT logs meals through a REST API.</p></div>
- </div>
- <div class="bus" aria-hidden="true"><i></i><i></i><i></i></div>
- <div class="cw" aria-label="Relevant coursework"><span class="lbl">relevant coursework:</span><span>Operating Systems</span><span>Computer Architecture</span><span>Systems Programming</span><span>Computer Security</span><span>ML for Computer Systems</span><span>Theory of Algorithms</span><span>Math of ML</span><span>Linear Algebra</span><span>Discrete Math</span><span>Software Development</span><span>Database Systems</span><span>Functional Programming</span><span>Formal Languages</span></div>
+<main>
+
+<section id="about">
+  <div class="front">
+    <div>
+      <h2><b>01</b>About</h2>
+      <p>I study Computer Science (Systems) and History at the University of Chicago. Most recently I was a quant dev intern at Maritime Capital, building Python/SQL pipelines that join LLM forecasts and market outcomes with historical L2 order books.</p>
+      <p>In that internship I worked on building executability filters from L2 data for trading strategy backtests net of fees, slippage and adverse selection, then sized liquidity and capacity limits into a deployment call.</p>
+      <p>Previously, I shipped user-facing features and refactored front-end components at Coding Flora, and built Python scrapers and pipelines for 10,000+ CRM records at Metrica IL.</p>
+      <p>One project I am proud of is <a href="https://github.com/jacobwolf-1/FastLog">FastLog</a>, a SwiftUI + Supabase macro tracker where ChatGPT logs meals through a REST API.</p>
+    </div>
+    <div>
+      <h2><b>02</b>Looking for</h2>
+      <p>New grad SWE roles in:</p>
+      <ul class="cols2">
+        <li>Systems</li>
+        <li>Backend</li>
+        <li>Data infrastructure</li>
+        <li>AI agents</li>
+        <li>Quant dev</li>
+        <li>Generalist SWE</li>
+      </ul>
+      <p class="note">Especially interested in performance work, data pipelines, trading infra, and agent tooling, but just as happy on a team where I can pick up whatever needs building.</p>
+    </div>
+  </div>
 </section>
 
-<style>
-.threads{display:grid;gap:10px}
-.thr{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;transition:background .3s,border-color .3s}
-.thr.on{background:var(--glow);border-color:var(--accent)}
-.thr .tid{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--muted);padding-top:3px}
-.thr h3{margin:0;font-size:16.5px}
-.thr .meta{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--muted);margin-top:2px}
-.thr ul{margin:8px 0 0;padding-left:18px;font-size:14.5px}
-.thr li{margin:3px 0}
-.thr p{margin:6px 0 0;font-size:14.5px}
-.thr .state{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;padding:2px 7px;border-radius:4px;border:1px solid currentColor;white-space:nowrap;color:var(--muted);min-width:11ch;text-align:center}
-.thr.on .state{color:var(--accent)}
-.core{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--muted);margin-bottom:16px}
-.core .ring{width:16px;height:16px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:spin 1s linear infinite}
-@media (max-width:560px){.thr{grid-template-columns:1fr}.thr .tid{padding:0}}
-</style>
-<section id="sched" class="sec">
- <p class="kicker">// 02 · round-robin scheduler</p>
- <h2 class="h2">Experience threads</h2>
- <div class="core"><span class="ring"></span>cpu0: quantum = 2s, run queue rotating</div>
- <div class="threads">
-  <div class="thr"><span class="tid">tid 1</span><div><h3>Quantitative Developer Intern · Maritime Capital LLC</h3><div class="meta">New York, NY · Jul 2026 – Oct 2026</div><ul><li>Enabled backtesting of LLM-driven prediction-market strategies with Python/SQL pipelines combining forecasts, outcomes and historical L2 order books.</li><li>Reconstructed executable prices from L2 data; built taker and passive-entry backtests modeling fees, slippage, VWAP, fill probability and adverse selection.</li><li>Delivered a deployment recommendation by quantifying liquidity and capacity limits and separating statistical alpha from executable returns.</li></ul></div><span class="state">EXITED(0)</span></div>
-  <div class="thr"><span class="tid">tid 2</span><div><h3>Software Engineering Intern · Coding Flora</h3><div class="meta">Chicago, IL · Jan 2025 – Sep 2025</div><ul><li>Shipped four user-facing features across three product workflows.</li><li>Refactored 10+ front-end components and reviewed changes for maintainability and release quality.</li></ul></div><span class="state">EXITED(0)</span></div>
-  <div class="thr"><span class="tid">tid 3</span><div><h3>Software Engineering Intern · Metrica IL</h3><div class="meta">Jerusalem, Israel · Jun 2024 – Aug 2024</div><ul><li>Extracted 10,000+ CRM data points with Python scrapers (requests, pandas, xlrd).</li><li>Automated data preparation for financial dashboards through pipelines integrated with Power BI.</li></ul></div><span class="state">EXITED(0)</span></div>
-  <div class="thr"><span class="tid">tid 4</span><div><h3>Building Manager · UChicago Student Centers</h3><div class="meta">Mar 2026 – present</div></div><span class="state">WAITING</span></div>
-  <div class="thr"><span class="tid">tid 5</span><div><h3>Algo Group · SWE professional development cohort</h3><div class="meta">Jan 2025 – present · selected member</div></div><span class="state">WAITING</span></div>
-  <div class="thr"><span class="tid">tid 6</span><div><h3>Torah Chair · Yavneh of Hyde Park</h3><div class="meta">Mar 2024 – Mar 2025 · taught 10–15 attendees weekly</div></div><span class="state">EXITED(0)</span></div>
- </div>
+<section id="skills">
+  <h2><b>03</b>Skills</h2>
+  <table>
+    <tbody>
+      <tr><td class="k">Systems</td><td>C and ARMv8 assembly for kernels and performance work</td></tr>
+      <tr><td class="k">Data &amp; ML</td><td>Python (pandas, NumPy, PyTorch, matplotlib) and SQL</td></tr>
+      <tr><td class="k">App dev</td><td>Swift, TypeScript, JavaScript, React, Django, HTML/CSS</td></tr>
+      <tr><td class="k">Tools</td><td>Linux, Git, pytest, REST APIs, OAuth</td></tr>
+      <tr><td class="k">Coursework</td><td>Operating Systems, Computer Architecture, Systems Programming, Computer Security, ML for Computer Systems, Database Systems, Software Development, Theory of Algorithms, Formal Languages, Functional Programming, Discrete Math, Math of ML, Linear Algebra</td></tr>
+      <tr><td class="k">Interests</td><td>Poker, soccer, cooking, hiking, <i>A Song of Ice and Fire</i></td></tr>
+    </tbody>
+  </table>
 </section>
 
-<style>
-.ps{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px}
-.ps-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
-.ps-row,.ps-head{display:grid;grid-template-columns:56px 44px 64px minmax(0,1fr) 18px;gap:10px;align-items:center;padding:11px 14px}
-.ps-head{color:var(--muted);font-size:11.5px;border-bottom:1px solid var(--line)}
-.ps details{border-bottom:1px solid var(--line)}
-.ps details:last-child{border-bottom:0}
-.ps summary{list-style:none;cursor:pointer}
-.ps summary::-webkit-details-marker{display:none}
-.ps summary:hover{background:var(--glow)}
-.ps .st{color:var(--accent);font-weight:600}
-.ps .st.s{color:var(--accent3)}
-.ps .cmd{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ps .car{color:var(--muted);transition:transform .2s}
-.ps details[open] .car{transform:rotate(90deg)}
-.ps .body{padding:2px 14px 16px 124px;font-family:Inter,system-ui,sans-serif;font-size:14.5px;color:var(--fg)}
-.ps .body ul{margin:0 0 10px;padding-left:18px}
-.ps .body li{margin:3px 0}
-.ps .tags{display:flex;gap:6px;flex-wrap:wrap}
-.ps .tags span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:var(--muted)}
-.cpu{display:flex;align-items:center;gap:6px}
-.cpu em{display:block;height:5px;border-radius:3px;background:var(--accent);font-style:normal;transition:width .6s}
-@media (max-width:640px){.ps-row,.ps-head{grid-template-columns:44px 30px 52px minmax(0,1fr) 14px;gap:6px;font-size:12px}.ps .body{padding:2px 14px 16px}}
-</style>
-<section id="procs" class="sec">
- <p class="kicker">// 03 · ps aux | grep projects</p>
- <h2 class="h2">Running processes</h2>
- <div class="ps">
-  <div class="ps-top"><span>tasks: 8 total, 7 running, 1 sleeping</span><span id="loadavg">load average: 0.42 0.37 0.31</span></div>
-  <div class="ps-head"><span>PID</span><span>S</span><span>%CPU</span><span>COMMAND</span><span></span></div>
-  <details open>
-   <summary class="ps-row"><span>1</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:48px"></em></span><span class="cmd">./pintos --threads --userprog --vm</span><span class="car">›</span></summary>
-   <div class="body"><ul><li>Extended Pintos, a small x86 teaching operating system, from a bare kernel into one that runs real user programs.</li><li><b>Threads:</b> kernel thread scheduling and synchronization.</li><li><b>User programs:</b> loading and running user processes and handling their system calls.</li><li><b>Virtual memory:</b> paging so each process gets its own address space, independent of physical memory.</li></ul><div class="tags"><span>C</span><span>x86</span><span>concurrency</span><span>virtual memory</span><span>OS</span></div></div>
-  </details>
-  <details>
-   <summary class="ps-row"><span>1024</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:44px"></em></span><span class="cmd">./armv8_sim --pipeline --bp=btb,pht --cache=lru</span><span class="car">›</span></summary>
-   <div class="body"><ul><li>Cycle-accurate ARMv8 simulator in C for evaluating pipeline, cache and branch-prediction performance.</li><li>Hazard detection, forwarding and control-flow handling to model stalls and execution.</li><li>BTB/PHT branch prediction and LRU instruction/data caches, evaluated on benchmark traces.</li></ul><div class="tags"><span>C</span><span>ARMv8</span><span>architecture</span><span>Git</span></div></div>
-  </details>
-  <details>
-   <summary class="ps-row"><span>2048</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:34px"></em></span><span class="cmd">./macro_placer --tournament --deterministic</span><span class="car">›</span></summary>
-   <div class="body"><ul><li>Co-developed a deterministic tournament placer for the Partcl/HRT challenge that generates and ranks VLSI macro-placement candidates.</li><li>Candidate generation and scoring, graph/anchor heuristics and spacing metrics to optimize proxy cost.</li><li>Experiment logging and ablation tools to evaluate individual heuristics.</li></ul><div class="tags"><span>Python</span><span>PyTorch</span><span>NumPy</span><span>OpenROAD</span></div></div>
-  </details>
-  <details>
-   <summary class="ps-row"><span>3072</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:28px"></em></span><span class="cmd">./lzw -c --maxbits=16 &lt; in.bin &gt; out.lzw</span><span class="car">›</span></summary>
-   <div class="body"><ul><li>Compressed binary streams with a C LZW codec using bit-level output and a MAXBITS code-width limit.</li><li>Chained hash-table dictionary lookups; verified lossless round trips across binary inputs.</li></ul><div class="tags"><span>C</span><span>Python</span><span>compression</span></div></div>
-  </details>
-  <details>
-   <summary class="ps-row"><span>4096</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:26px"></em></span><span class="cmd">./fastlog --serve --openapi</span><span class="car">›</span></summary>
-   <div class="body"><ul><li>Nutrition-tracking MVP spanning a SwiftUI app and Supabase backend: meal logging, daily macro targets, dashboards.</li><li>Assistants can log meals and update targets through authenticated REST endpoints documented with OpenAPI.</li><li>PostgreSQL model for logs, saved meals and targets, with saved-meal alias resolution and app sync.</li></ul><div class="tags"><span>SwiftUI</span><span>Supabase</span><span>PostgreSQL</span><span>TypeScript</span><span>HealthKit</span></div></div>
-  </details>
-  <details>
-   <summary class="ps-row"><span>5120</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:24px"></em></span><span class="cmd">./field_finder --sport=soccer --days=3</span><span class="car">›</span></summary>
-   <div class="body"><ul><li>Next.js app that compares NYC Parks field availability across several days in one table, with boroughs, park names and expandable permit details.</li><li>Reverse-engineered the permit map's vector tiles into a catalog of ~5,200 fields, joined to NYC Open Data park names.</li><li>Found the public JSON endpoints behind the map: four bulk calls per day regardless of field count, with TTL disk caching and slot detail fetched only on expand.</li></ul><div class="tags"><span>TypeScript</span><span>Next.js</span><span>React</span><span>Tailwind</span><span>open data</span></div></div>
-  </details>
-  <details>
-   <summary class="ps-row"><span>6144</span><span class="st">R</span><span class="cpu"><em data-cpu style="width:22px"></em></span><span class="cmd">./pm_research --espn --kalshi --lead-lag</span><span class="car">›</span></summary>
-   <div class="body"><ul><li>Matched-sample study of whether live ESPN win-probability updates lead Kalshi NBA winner-market prices over short horizons.</li><li>Reproducible ESPN/Kalshi collection and matching pipeline, with lead-lag cross-correlation and shock-strategy backtests under a transaction-cost model.</li><li>Pinned dependencies and a CI-tested smoke path that runs from a fresh clone on synthetic fixtures.</li></ul><div class="tags"><span>Python</span><span>pandas</span><span>market microstructure</span><span>prediction markets</span></div></div>
-  </details>
-  <details>
-   <summary class="ps-row"><span>8192</span><span class="st s">S</span><span class="cpu"><em data-cpu style="width:14px"></em></span><span class="cmd">./checkers --bot=minimax --difficulty=hard</span><span class="car">›</span></summary>
-   <div class="body"><ul><li>Playable checkers module for a course's online gaming platform (Chi Game), with game rules and multiple bot opponents.</li><li>Minimax-based hard bot; contributions merged through pull requests, code review and issue tracking.</li></ul><div class="tags"><span>JavaScript</span><span>Phaser 3</span><span>Linux</span></div></div>
-  </details>
- </div>
- <p style="font-size:13px;color:var(--muted);margin-top:12px;font-family:'JetBrains Mono',ui-monospace,monospace">source → <a href="https://github.com/jacobwolf-1">github.com/jacobwolf-1</a></p>
+<section id="experience">
+  <h2><b>04</b>Experience</h2>
+
+  <div class="job">
+    <div class="when"><b>Jul 2026 &ndash; Oct 2026</b>New York, NY</div>
+    <div>
+      <h3>Quantitative Developer Intern <em>&middot; Maritime Capital LLC</em></h3>
+      <ul>
+        <li>Enabled backtesting of LLM-driven prediction-market strategies with Python/SQL pipelines combining forecasts, outcomes and historical L2 order books.</li>
+        <li>Reconstructed executable prices from L2 data; built taker and passive-entry backtests modeling fees, slippage, VWAP, fill probability and adverse selection.</li>
+        <li>Delivered a deployment recommendation by quantifying liquidity and capacity limits and separating statistical alpha from executable returns.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><b>Jan 2025 &ndash; Sep 2025</b>Chicago, IL</div>
+    <div>
+      <h3>Software Engineering Intern <em>&middot; Coding Flora</em></h3>
+      <ul>
+        <li>Shipped four user-facing features across three product workflows.</li>
+        <li>Refactored 10+ front-end components and reviewed changes for maintainability and release quality.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="when"><b>Jun 2024 &ndash; Aug 2024</b>Jerusalem, Israel</div>
+    <div>
+      <h3>Software Engineering Intern <em>&middot; Metrica IL</em></h3>
+      <ul>
+        <li>Extracted 10,000+ CRM data points with Python scrapers (requests, pandas, xlrd).</li>
+        <li>Automated data preparation for financial dashboards through pipelines integrated with Power BI.</li>
+      </ul>
+    </div>
+  </div>
+
+  <table class="also">
+    <caption>Additional experience</caption>
+    <tbody>
+      <tr><td>Building Manager, UChicago Student Centers</td><td class="m">Mar 2026 &ndash; present</td></tr>
+      <tr><td>Cohort member, Algo Group (SWE professional development cohort)</td><td class="m">Jan 2025 &ndash; present</td></tr>
+      <tr><td>Torah Chair, Yavneh of Hyde Park. Organized and Instructed 10&ndash;15 attendees weekly.</td><td class="m">Mar 2024 &ndash; Mar 2025</td></tr>
+    </tbody>
+  </table>
 </section>
 
-<style>
-.tty{background:#05080a;color:#cfe9dd;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;box-shadow:0 20px 60px -30px var(--glow)}
-.tty-bar{display:flex;gap:7px;align-items:center;padding:10px 14px;background:#0d1316;border-bottom:1px solid #1b2629;color:#6f8580;font-size:12px}
-.tty-bar i{width:11px;height:11px;border-radius:50%;background:#2a3438;display:block}
-.tty-bar i:nth-child(1){background:#ff5f57}.tty-bar i:nth-child(2){background:#febc2e}.tty-bar i:nth-child(3){background:#28c840}
-.tty-out{padding:14px 16px;height:340px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;line-height:1.55}
-.tty-in{display:flex;gap:8px;align-items:center;padding:0 16px 14px}
-.tty-in span{color:#3ee6a8}
-.tty-in input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#cfe9dd;font:inherit;caret-color:#3ee6a8}
-.tty .g{color:#3ee6a8}.tty .o{color:#ff8a4c}.tty .b{color:#82a8ff}.tty .m{color:#6f8580}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.chips button{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer}
-.chips button:hover{border-color:var(--accent);color:var(--accent)}
-</style>
-<section id="tty" class="sec">
- <p class="kicker">// 04 · /dev/tty0</p>
- <h2 class="h2">Talk to the kernel</h2>
- <div class="tty">
-  <div class="tty-bar"><i></i><i></i><i></i><span style="margin-left:8px">jw@kernel — bash</span></div>
-  <div class="tty-out" id="out"><span class="m">JW-OS 6.0 (tty0). Type </span><span class="g">help</span><span class="m"> to list commands.</span>
+<section id="projects">
+  <h2><b>05</b>Projects</h2>
 
-<span class="g">jw@kernel:~$</span> whoami
-Jacob Wolf · CS (Systems) + History @ UChicago '27
+  <div class="lead">
+    <div>
+      <h3>ARMv8 simulator</h3>
+      <p class="cmd">./armv8_sim --pipeline --bp=btb,pht --cache=lru</p>
+      <ul>
+        <li>Cycle-accurate ARMv8 simulator in C for evaluating pipeline, cache and branch-prediction performance.</li>
+        <li>Hazard detection, forwarding and control-flow handling to model stalls and execution.</li>
+        <li>BTB/PHT branch prediction and LRU instruction/data caches, evaluated on benchmark traces.</li>
+      </ul>
+      <p class="stack">C &middot; ARMv8 &middot; architecture &middot; Git</p>
+    </div>
+    <figure>
+      <div class="scroll">
+      <svg viewBox="0 0 640 214" style="min-width:480px" role="img" aria-label="Block diagram of the simulated five-stage pipeline: fetch, decode, execute, memory, writeback, with a branch predictor feeding fetch, instruction and data caches, a hazard unit, and forwarding paths back into execute.">
+        <defs>
+          <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="var(--ink)"/></marker>
+          <marker id="ahm" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="var(--accent)"/></marker>
+        </defs>
+        <path class="wire m" d="M440 76V50H330V75" marker-end="url(#ahm)"/>
+        <path class="wire m" d="M560 76V36H310V75" marker-end="url(#ahm)"/>
+        <text x="435" y="30" text-anchor="middle" font-size="10.5" style="fill:var(--accent)">forward</text>
+        <path class="wire" d="M120 101H131M148 101H159M240 101H251M268 101H279M360 101H371M388 101H399M480 101H491M508 101H519"/>
+        <rect class="reg" x="132" y="68" width="16" height="66"/><rect class="reg" x="252" y="68" width="16" height="66"/>
+        <rect class="reg" x="372" y="68" width="16" height="66"/><rect class="reg" x="492" y="68" width="16" height="66"/>
+        <rect class="box" x="40" y="76" width="80" height="50"/><rect class="box" x="160" y="76" width="80" height="50"/>
+        <rect class="box" x="280" y="76" width="80" height="50" style="fill:var(--mark)"/><rect class="box" x="400" y="76" width="80" height="50"/>
+        <rect class="box" x="520" y="76" width="80" height="50"/>
+        <g font-size="15" font-weight="600" text-anchor="middle">
+          <text x="80" y="106">IF</text><text x="200" y="106">ID</text><text x="320" y="106">EX</text><text x="440" y="106">MEM</text><text x="560" y="106">WB</text>
+        </g>
+        <rect class="box" x="40" y="12" width="80" height="30"/>
+        <text x="80" y="31" text-anchor="middle" font-size="11">BTB / PHT</text>
+        <path class="wire" d="M80 42V75" marker-end="url(#ah)"/>
+        <rect class="box" x="40" y="166" width="80" height="30"/><text x="80" y="185" text-anchor="middle" font-size="11">L1i &middot; LRU</text>
+        <rect class="box" x="400" y="166" width="80" height="30"/><text x="440" y="185" text-anchor="middle" font-size="11">L1d &middot; LRU</text>
+        <path class="wire" d="M80 166V127" marker-end="url(#ah)"/>
+        <path class="wire" d="M440 166V127" marker-end="url(#ah)"/>
+        <rect class="box" x="180" y="166" width="160" height="30"/><text x="260" y="185" text-anchor="middle" font-size="11">hazard detect</text>
+        <path class="wire d" d="M200 166V127" marker-end="url(#ah)"/>
+        <path class="wire d" d="M320 166V127" marker-end="url(#ah)"/>
+        <text x="260" y="152" text-anchor="middle" font-size="10.5" style="fill:var(--soft)">stall / flush</text>
+      </svg>
+      </div>
+      <figcaption>The pipeline the simulator models, cycle by cycle.</figcaption>
+    </figure>
+  </div>
+
+  <div class="apps">
+    <article class="app">
+      <h3>Pintos</h3>
+      <p class="cmd">./pintos --threads --userprog --vm</p>
+      <ul>
+        <li>Extended Pintos, a small x86 teaching operating system, from a bare kernel into one that runs real user programs.</li>
+        <li><b>Threads:</b> kernel thread scheduling and synchronization.</li>
+        <li><b>User programs:</b> loading and running user processes and handling their system calls.</li>
+        <li><b>Virtual memory:</b> paging so each process gets its own address space, independent of physical memory.</li>
+      </ul>
+      <p class="stack">C &middot; x86 &middot; concurrency &middot; virtual memory &middot; OS</p>
+    </article>
+
+    <article class="app">
+      <h3><a href="https://github.com/quentinmaret/macro-placement">Macro placer</a></h3>
+      <p class="cmd">./macro_placer --tournament --deterministic</p>
+      <ul>
+        <li>Co-developed a deterministic tournament placer for the Partcl/HRT challenge that generates and ranks VLSI macro-placement candidates.</li>
+        <li>Candidate generation and scoring, graph/anchor heuristics and spacing metrics to optimize proxy cost.</li>
+        <li>Experiment logging and ablation tools to evaluate individual heuristics.</li>
+      </ul>
+      <p class="stack">Python &middot; PyTorch &middot; NumPy &middot; OpenROAD</p>
+    </article>
+
+    <article class="app">
+      <h3><a href="https://github.com/jacobwolf-1/prediction-market-research">Prediction-market research</a></h3>
+      <p class="cmd">./pm_research --espn --kalshi --lead-lag</p>
+      <ul>
+        <li>Matched-sample study of whether live ESPN win-probability updates lead Kalshi NBA winner-market prices over short horizons.</li>
+        <li>Reproducible ESPN/Kalshi collection and matching pipeline, with lead-lag cross-correlation and shock-strategy backtests under a transaction-cost model.</li>
+        <li>Pinned dependencies and a CI-tested smoke path that runs from a fresh clone on synthetic fixtures.</li>
+      </ul>
+      <p class="stack">Python &middot; pandas &middot; market microstructure &middot; prediction markets</p>
+    </article>
+
+    <article class="app">
+      <h3><a href="https://github.com/jacobwolf-1/FastLog">FastLog</a></h3>
+      <p class="cmd">./fastlog --serve --openapi</p>
+      <ul>
+        <li>Nutrition-tracking MVP spanning a SwiftUI app and Supabase backend: meal logging, daily macro targets, dashboards.</li>
+        <li>Assistants can log meals and update targets through authenticated REST endpoints documented with OpenAPI.</li>
+        <li>PostgreSQL model for logs, saved meals and targets, with saved-meal alias resolution and app sync.</li>
+      </ul>
+      <p class="stack">SwiftUI &middot; Supabase &middot; PostgreSQL &middot; TypeScript &middot; HealthKit</p>
+    </article>
+
+    <article class="app">
+      <h3><a href="https://github.com/jacobwolf-1/NYC-Field-Finder">NYC Field Finder</a></h3>
+      <p class="cmd">./field_finder --sport=soccer --days=3</p>
+      <ul>
+        <li>Next.js app that compares NYC Parks field availability across several days in one table, with boroughs, park names and expandable permit details.</li>
+        <li>Reverse-engineered the permit map's vector tiles into a catalog of ~5,200 fields, joined to NYC Open Data park names.</li>
+        <li>Found the public JSON endpoints behind the map: four bulk calls per day regardless of field count, with TTL disk caching and slot detail fetched only on expand.</li>
+      </ul>
+      <p class="stack">TypeScript &middot; Next.js &middot; React &middot; Tailwind &middot; open data</p>
+    </article>
+
+    <article class="app">
+      <h3>LZW codec</h3>
+      <p class="cmd">./lzw -c --maxbits=16 &lt; in.bin &gt; out.lzw</p>
+      <ul>
+        <li>Compressed binary streams with a C LZW codec using bit-level output and a MAXBITS code-width limit.</li>
+        <li>Chained hash-table dictionary lookups; verified lossless round trips across binary inputs.</li>
+      </ul>
+      <p class="stack">C &middot; Python &middot; compression</p>
+    </article>
+
+    <article class="app">
+      <h3><a href="https://github.com/uchicago-cs/chigame/pull/1544">Checkers</a></h3>
+      <p class="cmd">./checkers --bot=minimax --difficulty=hard</p>
+      <ul>
+        <li>Playable checkers module for a course's online gaming platform (Chi Game), with game rules and multiple bot opponents.</li>
+        <li>Minimax-based hard bot; contributions merged through pull requests, code review and issue tracking.</li>
+      </ul>
+      <p class="stack">JavaScript &middot; Phaser 3 &middot; Linux</p>
+    </article>
+  </div>
+  <p class="note">Linked titles go to the code. The rest is coursework that isn't public, but I'm happy to walk through it.</p>
+</section>
+
+</main>
+
+<footer>&copy; 2026 Jacob Wolf</footer>
+
 </div>
-  <form class="tty-in" id="form" autocomplete="off"><span>jw@kernel:~$</span><input id="cmd" aria-label="Terminal command" spellcheck="false"></form>
- </div>
- <div class="chips" id="chips"><button>help</button><button>ls projects</button><button>cat skills.txt</button><button>cat interests.txt</button><button>top</button><button>contact</button><button>sudo hire jw</button></div>
-</section>
-
-<style>
-.foot{max-width:1080px;margin:0 auto;padding:24px 16px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.sys{display:block;text-decoration:none;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;transition:border-color .2s,transform .2s;overflow-wrap:anywhere}
-.sys:hover{border-color:var(--accent);transform:translateY(-2px)}
-.sys small{display:block;color:var(--muted);font-size:11.5px;margin-bottom:4px}
-</style>
-<footer id="contact">
- <div class="sec" style="padding-bottom:0"><p class="kicker">// 05 · syscalls</p><h2 class="h2" style="margin-bottom:0">Get in touch</h2></div>
- <div class="foot">
-  <a class="sys" href="mailto:jacobwolf@uchicago.edu"><small>sys_write("mail")</small>jacobwolf@uchicago.edu</a>
-  <a class="sys" href="https://github.com/jacobwolf-1"><small>sys_open("github")</small>jacobwolf-1</a>
-  <a class="sys" href="https://www.linkedin.com/in/jacob-max-wolf"><small>sys_open("linkedin")</small>jacob-max-wolf</a>
-  <a class="sys" href="https://x.com/jacobm_wolf"><small>sys_open("x")</small>@jacobm_wolf</a>
-  <a class="sys" href="Wolf_Jacob_Resume.pdf"><small>sys_read("resume.pdf")</small>Download resume</a>
- </div>
- <p style="text-align:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--muted);padding:0 16px 40px">© 2026 Jacob Wolf · process exited with status 0</p>
-</footer>
-
 <script>
-(function(){
- var root=document.documentElement;
- try{var t=localStorage.getItem('jw-theme');if(t)root.setAttribute('data-theme',t);}catch(e){}
- document.getElementById('theme').addEventListener('click',function(){
-  var cur=root.getAttribute('data-theme');
-  var dark=cur?cur==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
-  var n=dark?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('jw-theme',n);}catch(e){}
- });
-
- var bars=[].slice.call(document.querySelectorAll('[data-cpu]'));
- var base=bars.map(function(b){return parseFloat(b.style.width);});
- var la=document.getElementById('loadavg'),l=[.42,.37,.31];
- setInterval(function(){
-  bars.forEach(function(b,i){var w=Math.max(3,Math.min(52,base[i]+(Math.random()-.5)*base[i]*.8));b.style.width=w+'px';});
-  l[0]=Math.max(.05,l[0]+(Math.random()-.5)*.12);l[1]=l[1]*.9+l[0]*.1;l[2]=l[2]*.97+l[0]*.03;
-  la.textContent='load average: '+l.map(function(x){return x.toFixed(2)}).join(' ');
- },1100);
-
- var thr=[].slice.call(document.querySelectorAll('.thr')),rq=0;
- thr.forEach(function(t){var s=t.querySelector('.state');s.setAttribute('data-idle',s.textContent);});
- function sched(){
-  thr.forEach(function(t,i){var on=i===rq,s=t.querySelector('.state');t.classList.toggle('on',on);s.textContent=on?'RUNNING':s.getAttribute('data-idle');});
-  rq=(rq+1)%thr.length;
- }
- sched();
- if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(sched,2000);
-
- var out=document.getElementById('out'),inp=document.getElementById('cmd'),hist=[],hi=0;
- function esc(s){return s.replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]});}
- function print(html){out.innerHTML+=html+'\n';out.scrollTop=out.scrollHeight;}
- var L='style="color:#82a8ff"';
- var cmds={
-  help:function(){return '<span class="b">whoami</span>            who is this\n<span class="b">ls projects</span>       list running processes\n<span class="b">cat skills.txt</span>    languages and tools\n<span class="b">cat interests.txt</span> off the clock\n<span class="b">top</span>               recent experience\n<span class="b">contact</span>           how to reach me\n<span class="b">open &lt;project&gt;</span>    view source, e.g. open fastlog\n<span class="b">open github|linkedin|x|resume</span>\n<span class="b">clear</span>             clear the screen';},
-  whoami:function(){return 'Jacob Wolf · CS (Systems) + History @ UChicago \'27';},
-  'ls projects':function(){return '<span class="g">pintos/</span>  <span class="g">armv8_sim/</span>  <span class="g">macro_placer/</span>\n<span class="g">lzw/</span>  <span class="g">fastlog/</span>  <span class="g">field_finder/</span>\n<span class="g">pm_research/</span>  <span class="m">checkers/</span>\n<span class="m">type </span><span class="g">open &lt;name&gt;</span><span class="m"> to view a project\'s source</span>';},
-  ls:function(){return cmds['ls projects']();},
-  'cat skills.txt':function(){return '<span class="m">languages:</span> Python, C, JavaScript, SQL, Swift, ARMv8 asm, HTML/CSS\n<span class="m">tools:</span>     pandas, NumPy, PyTorch, matplotlib, pytest, React,\n           Django, Git, Linux, REST APIs, OAuth';},
-  'cat interests.txt':function(){return 'poker · soccer · cooking · hiking · A Song of Ice and Fire';},
-  top:function(){return '<span class="m">  TID  STATE     THREAD</span>\n    1  EXITED    Quant Dev Intern, Maritime Capital (2026)\n    2  EXITED    SWE Intern, Coding Flora (2025)\n    3  EXITED    SWE Intern, Metrica IL (2024)\n    4  RUNNING   Building Manager, UChicago Student Centers';},
-  contact:function(){return 'email:    <a href="mailto:jacobwolf@uchicago.edu" '+L+'>jacobwolf@uchicago.edu</a>\ngithub:   <a href="https://github.com/jacobwolf-1" '+L+'>jacobwolf-1</a>\nlinkedin: <a href="https://www.linkedin.com/in/jacob-max-wolf" '+L+'>jacob-max-wolf</a>\nx:        <a href="https://x.com/jacobm_wolf" '+L+'>@jacobm_wolf</a>';},
-  'open x':function(){window.open('https://x.com/jacobm_wolf','_blank');return 'opening x.com/jacobm_wolf ...';},
-  'open github':function(){window.open('https://github.com/jacobwolf-1','_blank');return 'opening github.com/jacobwolf-1 ...';},
-  'open linkedin':function(){window.open('https://www.linkedin.com/in/jacob-max-wolf','_blank');return 'opening linkedin ...';},
-  'open resume':function(){window.open('Wolf_Jacob_Resume.pdf','_blank');return 'reading resume.pdf ...';},
-  'sudo hire jw':function(){return '[sudo] password for recruiter: ********\n<span class="g">permission granted.</span> scheduling interview with pid 1 ...\n→ <a href="mailto:jacobwolf@uchicago.edu" '+L+'>jacobwolf@uchicago.edu</a>';},
-  sudo:function(){return '<span class="o">usage:</span> sudo hire jw';},
-  'rm -rf /':function(){return '<span class="o">nice try.</span> kernel panic averted.';},
-  exit:function(){return 'there is no escape from pid 1.';}
- };
- var repos={pintos:0,armv8_sim:0,macro_placer:0,lzw:0,fastlog:'https://github.com/jacobwolf-1/FastLog',field_finder:'https://github.com/jacobwolf-1/NYC-Field-Finder',pm_research:'https://github.com/jacobwolf-1/prediction-market-research',checkers:0};
- function openProj(n){
-  var u=repos[n];
-  if(u){window.open(u,'_blank');return 'opening <a href="'+u+'" '+L+'>'+u.replace('https://','')+'</a> ...';}
-  return '<span class="o">'+n+':</span> source not public yet, available on request → <a href="mailto:jacobwolf@uchicago.edu?subject='+n+'%20source" '+L+'>jacobwolf@uchicago.edu</a>';
- }
- function run(c){
-  c=c.trim().replace(/\s+/g,' ');if(!c)return;
-  print('<span class="g">jw@kernel:~$</span> '+esc(c));
-  if(c==='clear'){out.innerHTML='';return;}
-  var lc=c.toLowerCase(),m=lc.match(/^(?:open|cd) (\S+?)\/?$/);
-  if(m&&repos.hasOwnProperty(m[1])){print(openProj(m[1]));return;}
-  var f=cmds[lc];
-  print(f?f():'<span class="o">bash: '+esc(c)+': command not found</span> · try <span class="g">help</span>');
- }
- document.getElementById('form').addEventListener('submit',function(e){e.preventDefault();var v=inp.value;if(v.trim()){hist.push(v);hi=hist.length;}run(v);inp.value='';});
- inp.addEventListener('keydown',function(e){
-  if(e.key==='ArrowUp'&&hi>0){hi--;inp.value=hist[hi];e.preventDefault();}
-  else if(e.key==='ArrowDown'){hi=Math.min(hist.length,hi+1);inp.value=hist[hi]||'';e.preventDefault();}
- });
- document.getElementById('chips').addEventListener('click',function(e){if(e.target.tagName==='BUTTON'){run(e.target.textContent);}});
+(function () {
+  var root = document.documentElement, btn = document.getElementById('theme');
+  function paint() {
+    var cur = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    btn.querySelectorAll('span').forEach(function (s) { s.classList.toggle('on', s.dataset.t === cur); });
+  }
+  btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    if (next === 'light') root.setAttribute('data-theme', 'light'); else root.removeAttribute('data-theme');
+    try { localStorage.setItem('jw-theme', next); } catch (e) {}
+    paint();
+  });
+  paint();
 })();
 </script>
 </body>
 </html>
-
