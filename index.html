@@ -54,8 +54,12 @@ h1,h2,h3{margin:0;font-family:var(--serif)}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
 
 /* top */
-.bar .sheet{display:flex;justify-content:flex-end;padding-top:12px}
-.theme{font-size:14.5px;font-style:italic;color:var(--soft);display:flex;gap:6px}
+.bar .sheet{display:flex;justify-content:space-between;align-items:baseline;gap:0 28px;padding-top:12px}
+.toc{display:flex;flex-wrap:wrap;gap:1px 20px;font-size:14.5px;font-style:italic}
+.toc a{color:var(--soft);text-decoration-color:transparent;white-space:nowrap}
+.toc a:hover,.toc a:focus-visible{color:var(--ink);text-decoration-color:var(--accent)}
+.toc i{color:var(--accent);margin-right:.3em}
+.theme{flex:none;font-size:14.5px;font-style:italic;color:var(--soft);display:flex;gap:6px}
 .theme span.on{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
 .hero{position:relative;padding:26px 0 40px}
 .hero > :not(.pfp){max-width:calc(100% - 200px)}
@@ -166,7 +170,18 @@ footer{border-top:1px solid var(--ink);padding:14px 0 40px;font-size:14.5px;colo
 </style>
 </head>
 <body>
-<div class="bar"><div class="sheet"><button class="theme" id="theme" type="button" aria-label="Switch color theme"><span data-t="dark">Dark</span>/<span data-t="light">Light</span></button></div></div>
+<div class="bar"><div class="sheet">
+  <nav class="toc" aria-label="Sections">
+    <a href="#about"><i>1.</i>About</a>
+    <a href="#looking"><i>2.</i>Looking for</a>
+    <a href="#skills"><i>3.</i>Skills</a>
+    <a href="#experience"><i>4.</i>Experience</a>
+    <a href="#projects"><i>5.</i>Projects</a>
+    <a href="#travel"><i>6.</i>Travel</a>
+    <a href="#books"><i>7.</i>Books</a>
+  </nav>
+  <button class="theme" id="theme" type="button" aria-label="Switch color theme"><span data-t="dark">Dark</span>/<span data-t="light">Light</span></button>
+</div></div>
 <div class="sheet">
 <header class="hero">
   <img class="pfp" src="images/jw_pfp.jpg" alt="Jacob Wolf sitting on a rock above a mountain valley" width="158" height="210">
@@ -192,7 +207,7 @@ footer{border-top:1px solid var(--ink);padding:14px 0 40px;font-size:14.5px;colo
       <p>Previously, I shipped user facing features and refactored front end components at Coding Flora, and built Python scrapers and pipelines for 10,000+ CRM records at Metrica IL.</p>
       <p>Right now I am in the early stages of building on top of Hyperliquid, an on-chain exchange.</p>
     </div>
-    <div>
+    <div id="looking">
       <h2><span class="n">2.</span>Looking for</h2>
       <p>New grad SWE roles in:</p>
       <ul class="cols2">
