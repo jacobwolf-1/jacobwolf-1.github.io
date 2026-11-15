@@ -410,8 +410,8 @@ footer{border-top:1px solid var(--ink);padding:14px 0 40px;font-size:14.5px;colo
       <div class="zoom"><button type="button" data-z="1.6" aria-label="Zoom in">+</button><button type="button" data-z="0.625" aria-label="Zoom out">&minus;</button></div>
     </div>
     <figure class="shot" id="shot" aria-live="polite">
-      <img src="images/Venice_Italy.webp" alt="Venice, Italy">
-      <figcaption>Venice, <i>Italy</i></figcaption>
+      <img src="images/Samarkand_Uzbekistan.webp" alt="Samarkand, Uzbekistan">
+      <figcaption>Samarkand, <i>Uzbekistan</i></figcaption>
     </figure>
   </div>
 </section>
@@ -546,7 +546,7 @@ footer{border-top:1px solid var(--ink);padding:14px 0 40px;font-size:14.5px;colo
   var shot = document.getElementById('shot'), img = shot.querySelector('img'), cap = shot.querySelector('figcaption');
   var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var rot = [-22, -36], k = 1, selected = null;   // rot = [-longitude, -latitude] at the centre
+  var rot = [-77, -36], k = 1, selected = null;   // rot = [-longitude, -latitude] at the centre
   var ready = false, seen = false, spinning = !still, dragging = false, moved = false;
   var vel = [0, 0], fly = null, frame = 0, size = 0;
   var proj, path, ctx, land, borders, grid;
@@ -706,7 +706,7 @@ footer{border-top:1px solid var(--ink);padding:14px 0 40px;font-size:14.5px;colo
   });
   document.getElementById('theme').addEventListener('click', kick);
 
-  select(P.filter(function (p) { return p.name === 'Venice'; })[0], false);
+  select(P.filter(function (p) { return p.name === 'Samarkand'; })[0], false);
   spinning = !still;
 
   /* the map itself loads only once the section is close */
